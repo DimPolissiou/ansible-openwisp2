@@ -46,6 +46,7 @@
     virtualenv_site_packages: yes
   with_items:
     - "git+git://github.com/openwisp/netjsonconfig#egg=netjsonconfig"
+    - "git+git://github.com/DimPolissiou/django-devices#egg=django-devices"
   notify: reload supervisor
 
 - name: Install extra django apps

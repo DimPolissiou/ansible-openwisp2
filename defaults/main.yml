@@ -30,3 +30,6 @@ openwisp2_sentry:
     dsn: false
 openwisp2_default_cert_validity: 1825
 openwisp2_default_ca_validity: 3650
+openwisp2_cas_server: "http://127.0.0.1/cas/"
+openwisp2_cas_affiliation: "userPrincipalName"
+openwisp2_collectd_rrd_dir: "/var/lib/collectd/rrd/"

@@ -20,6 +20,7 @@
     virtualenv_site_packages: yes
   with_items:
     - django-netjsonconfig
+    - "git+git://github.com/DimPolissiou/django-devices#egg=django-devices"
   notify: reload supervisor
 
 - name: Install development version of django-netjsonconfig
@@ -32,6 +33,7 @@
     virtualenv_site_packages: yes
   with_items:
     - "git+git://github.com/openwisp/django-netjsonconfig#egg=django-netjsonconfig"
+    - "git+git://github.com/DimPolissiou/django-devices#egg=django-devices"
   notify: reload supervisor
 
 - name: Install development version of netjsonconfig

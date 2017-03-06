@@ -30,6 +30,18 @@ INSTALLED_APPS = [
     'sortedm2m',
     'reversion',
     'django_x509',
+     'leaflet',
+    'djgeojson',
+    'django_cas_ng',
+    'guardian',
+    'rules.apps.AutodiscoverRulesConfig',
+    'django_actions',
+    'search_listview',
+    'bootstrap_themes',
+    'crispy_forms',
+    'rest_framework',
+    'collectd_rest',
+    'devices',
 {% for app in openwisp2_extra_django_apps %}
     '{{ app }}',
 {% endfor %}
@@ -204,3 +216,47 @@ LOGGING = {
 {% if openwisp2_sentry.get('dsn') %}
 RAVEN_CONFIG = {{ openwisp2_sentry|to_nice_json }}
 {% endif %}
+
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (51.47879, 0),
+    'DEFAULT_ZOOM': 5,
+    'MIN_ZOOM': 3,
+    'MAX_ZOOM': 18,
+    'PLUGINS': {
+        'basics': {
+            'js': ['http://fgnass.github.io/spin.js/dist/spin.min.js',
+                   'http://makinacorpus.github.io/Leaflet.Spin/leaflet.spin.js'],
+            'auto-include': True
+                }
+        }
+}
+
+SERIALIZATION_MODULES = {
+    'geojson': 'djgeojson.serializers'
+}
+
+AUTHENTICATION_BACKENDS = (
+    'rules.permissions.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend', # default
+    'guardian.backends.ObjectPermissionBackend',
+    'django_cas_ng.backends.CASBackend',
+)
+
+GUARDIAN_RENDER_403 = True
+
+LOGIN_URL = 'cas_ng_login'
+LOGIN_REDIRECT_URL = 'devices_home'
+LOGOUT_URL = 'cas_ng_login'
+LOGOUT_REDIRECT_URL = 'cas_ng_login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+CAS_SERVER_URL = 'http://127.0.0.1/cas/'
+CAS_VERSION = '3'
+CAS_REDIRECT_URL = 'devices_home'
+
+COLLECTD_RRD_DIR = "/var/lib/collectd/rrd/"
+AFFILIATION_FIELD = "affiliation"

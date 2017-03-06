@@ -254,9 +254,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
-CAS_SERVER_URL = 'http://127.0.0.1/cas/'
+CAS_SERVER_URL = '{{ openwisp2_cas_server }}'
 CAS_VERSION = '3'
 CAS_REDIRECT_URL = 'devices_home'
+AFFILIATION_FIELD = '{{ openwisp2_cas_affiliation }}'
 
-COLLECTD_RRD_DIR = "/var/lib/collectd/rrd/"
-AFFILIATION_FIELD = "affiliation"
+COLLECTD_RRD_DIR = '{{ openwisp2_collectd_rrd_dir }}'

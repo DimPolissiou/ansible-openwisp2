@@ -1,6 +1,8 @@
 from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django_netjsonconfig.admin_theme.admin import admin, openwisp_admin
+from django.views.generic.base import RedirectView
+from django_cas_ng.views import login, logout, callback
 
 openwisp_admin()
 

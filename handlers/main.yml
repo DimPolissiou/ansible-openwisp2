@@ -11,3 +11,10 @@
 
 - name: restart nginx
   service: name=nginx state=restarted
+
+- name: "Restart collectd"
+  service: >
+    name=collectd
+    state=restarted
+  tags:
+    - collectd

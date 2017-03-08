@@ -1,0 +1,39 @@
+Hostname "Server"
+FQDNLookup true
+AutoLoadPlugin true
+
+LoadPlugin logfile
+LoadPlugin syslog
+
+<Plugin logfile>
+	LogLevel "info"
+	File STDOUT
+	Timestamp true
+	PrintSeverity false
+</Plugin>
+
+<Plugin syslog>
+	LogLevel info
+</Plugin>
+
+LoadPlugin network
+LoadPlugin rrdtool
+
+<Plugin network>
+	# server setup:
+	Listen "0.0.0.0" "25826"
+	# "garbage collection"
+	CacheFlush 1800
+</Plugin>
+
+<Plugin rrdtool>
+	DataDir "{{ /var/lib/collectd/rrd }}"
+	CacheTimeout 120
+	CacheFlush 900
+	WritesPerSecond 50
+</Plugin>
+
+<Include "/etc/collectd/collectd.conf.d">
+	Filter "*.conf"
+</Include>
+

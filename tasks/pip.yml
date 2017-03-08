@@ -20,6 +20,7 @@
     virtualenv_site_packages: yes
   with_items:
     - django-netjsonconfig
+    - "https://github.com/DimPolissiou/django-actions/raw/master/django-actions-priv-0.0.10-py2.py3-none-any.whl"
     - "git+git://github.com/DimPolissiou/django-devices#egg=django-devices"
   notify: reload supervisor
 
@@ -33,6 +34,7 @@
     virtualenv_site_packages: yes
   with_items:
     - "git+git://github.com/openwisp/django-netjsonconfig#egg=django-netjsonconfig"
+    - "https://github.com/DimPolissiou/django-actions/raw/master/django-actions-priv-0.0.10-py2.py3-none-any.whl"
     - "git+git://github.com/DimPolissiou/django-devices#egg=django-devices"
   notify: reload supervisor
 
@@ -46,6 +48,7 @@
     virtualenv_site_packages: yes
   with_items:
     - "git+git://github.com/openwisp/netjsonconfig#egg=netjsonconfig"
+    - "https://github.com/DimPolissiou/django-actions/raw/master/django-actions-priv-0.0.10-py2.py3-none-any.whl"
     - "git+git://github.com/DimPolissiou/django-devices#egg=django-devices"
   notify: reload supervisor
 

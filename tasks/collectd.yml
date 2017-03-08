@@ -1,0 +1,13 @@
+---
+- name: Install Collectd and RRDTool
+  apt: name={{ item }} state=latest
+  notify: reload systemd
+  with_items:
+    - librrds-perl
+    - collectd
+    - rrdtool
+
+- name: Configure Collectd
+  template: src=../templates/collectd.conf.j2 dest=/etc/collectd/collectd.conf
+  notify:
+- restart collectd

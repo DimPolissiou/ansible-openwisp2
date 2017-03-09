@@ -27,7 +27,7 @@ LoadPlugin rrdtool
 </Plugin>
 
 <Plugin rrdtool>
-	DataDir "{{ /var/lib/collectd/rrd }}"
+	DataDir "{{ openwisp2_collectd_rrd_dir }}"
 	CacheTimeout 120
 	CacheFlush 900
 	WritesPerSecond 50

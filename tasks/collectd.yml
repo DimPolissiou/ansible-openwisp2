@@ -9,5 +9,4 @@
 
 - name: Configure Collectd
   template: src=../templates/collectd.conf.j2 dest=/etc/collectd/collectd.conf
-  notify:
-- restart collectd
+  notify: restart collectd

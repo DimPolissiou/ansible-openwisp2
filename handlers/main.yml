@@ -4,7 +4,7 @@
 
 - name: reload systemd
   shell: systemctl daemon-reload
-  when: ansible_distribution_release in ['jessie', 'xenial']
+  when: ansible_distribution_release in ['jessie', 'xenial', 'CentOS']
 
 - name: reload supervisor
   shell: supervisorctl reload

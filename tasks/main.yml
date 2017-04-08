@@ -1,7 +1,12 @@
 ### openwisp2
 ## tasks
 - include: apt.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   tags: [openwisp2, apt]
+  
+- include: yum.yml
+  when: ansible_distribution == 'CentOS'
+  tags: [openwisp2, yum]
 
 - include: pip.yml
   tags: [openwisp2, pip]

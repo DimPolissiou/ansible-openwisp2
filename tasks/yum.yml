@@ -1,0 +1,84 @@
+- name: Update YUM package cache
+  yum: update_cache=yes
+  
+- name: Install system packages (1/2)
+  apt: name={{ item }} state=latest
+  notify: reload systemd
+  with_items:
+    - sudo
+    - gcc
+    - gcc-c++
+    - make
+    - automake
+    - kernel-devel
+    - python-setuptools
+    - libselinux-python
+ 
+ - name: install epel repo
+   yum:
+     name: "{{ epel_repo_url }}"
+     state: present
+   tags:
+     - epel
+
+ - name: import epel gpg key
+   rpm_key:
+     key: "{{ epel_repo_gpg_key_path }}"
+     state: present
+   tags:
+      - epel
+      
+- name: Update YUM package cache
+  yum: update_cache=yes
+
+- name: Install system packages (2/2)
+  apt: name={{ item }} state=latest
+  notify: reload systemd
+  with_items:
+    - sqlite
+    - sqlite-devel
+    - supervisor
+    - nginx
+    - openssl
+    - openssl-devel
+    - libffi-devel
+    - python-devel
+
+# fixes issue described in https://docs.ansible.com/ansible/become.html#becoming-an-unprivileged-user
+- name: Install acl if acting as non-root user
+  yum: name=acl state=latest
+  when: ansible_user != 'root'
+
+- name: ensure supervisor is started
+  service: name=supervisor state=started
+
+- name: Install python2 packages
+  when: openwisp2_python in ["python2.7", "python2"]
+  yum: name={{ item }} state=latest
+  with_items:
+    - python-pip
+    - python-devel
+
+- name: Install python3 packages
+  when: openwisp2_python == "python3"
+  yum: name={{ item }} state=latest
+  with_items:
+    - python34
+    - python34-pip
+    - python3-devel
+
+- name: Install python wheel (optional, allowed to fail)
+  ignore_errors: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - python-wheel
+
+- name: Install python3-virtualenv
+  ignore_errors: yes
+  when: ansible_distribution != 'Ubuntu'
+  apt: name={{ item }} state=latest
+  with_items:
+    - python3-virtualenv
+
+- name: Install git
+  yum: name=git state=latest

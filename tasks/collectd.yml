@@ -1,11 +1,21 @@
 ---
 - name: Install Collectd and RRDTool
   apt: name={{ item }} state=latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   notify: reload systemd
   with_items:
     - librrds-perl
     - collectd
     - rrdtool
+    
+- name: Install Collectd and RRDTool
+  yum: name={{ item }} state=latest
+  when: ansible_distribution == 'CentOS'
+  notify: reload systemd
+  with_items:
+    - collectd
+    - rrdtool
+    - rrdtool-devel
 
 - name: Configure Collectd
   template: src=../templates/collectd.conf.j2 dest=/etc/collectd/collectd.conf

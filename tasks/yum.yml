@@ -58,6 +58,10 @@
   with_items:
     - python-pip
     - python-devel
+    
+- name: Install virtualenv
+  when: openwisp2_python in ["python2.7", "python2"]
+  command: "sudo pip install virtualenv"
 
 - name: Install python3 packages
   when: openwisp2_python == "python3"
@@ -67,18 +71,15 @@
     - python34-pip
     - python3-devel
 
+- name: Install virtualenv
+  when: openwisp2_python == "python3"
+  command: "sudo pip3 install virtualenv"
+
 - name: Install python wheel (optional, allowed to fail)
   ignore_errors: yes
   yum: name={{ item }} state=latest
   with_items:
     - python-wheel
-
-- name: Install python3-virtualenv
-  ignore_errors: yes
-  when: ansible_distribution != 'Ubuntu'
-  apt: name={{ item }} state=latest
-  with_items:
-    - python3-virtualenv
 
 - name: Install git
   yum: name=git state=latest

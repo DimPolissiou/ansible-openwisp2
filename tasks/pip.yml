@@ -19,7 +19,7 @@
     virtualenv_python: "{{ openwisp2_python }}"
     virtualenv_site_packages: yes
   with_items:
-    - django-netjsonconfig
+    - django-netjsonconfig==0.5.4
     - "git+git://github.com/DimPolissiou/django-devices#egg=django-devices"
   notify: reload supervisor
 

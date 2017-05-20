@@ -256,7 +256,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 CAS_SERVER_URL = '{{ openwisp2_cas_server }}'
 CAS_VERSION = '3'
-CAS_REDIRECT_URL = 'devices_home'
+CAS_REDIRECT_URL = 'devices/'
 AFFILIATION_FIELD = '{{ openwisp2_cas_affiliation }}'
 
 COLLECTD_RRD_DIR = '{{ openwisp2_collectd_rrd_dir }}'

@@ -1,10 +1,12 @@
 from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth.decorators import login_required
 from django_netjsonconfig.admin_theme.admin import admin, openwisp_admin
 from django.views.generic.base import RedirectView
 from django_cas_ng.views import login, logout, callback
 
 openwisp_admin()
+admin.site.login = login_required(admin.site.login)
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(pattern_name='devices_home', permanent=True), name='index'),

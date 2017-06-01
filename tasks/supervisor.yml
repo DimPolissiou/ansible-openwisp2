@@ -7,7 +7,17 @@
     - supervisor
 
 - name: supervisor uwsgi
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   action: template src=../templates/supervisor.j2 dest=/etc/supervisor/conf.d/openwisp2.conf
+  notify: reload supervisor
+  tags:
+    - openwisp2
+    - supervisor
+
+
+- name: supervisor uwsgi
+  when: ansible_distribution == 'CentOS'
+  action: template src=../templates/supervisor.j2 dest=/etc/supervisor.d/openwisp2.conf
   notify: reload supervisor
   tags:
     - openwisp2

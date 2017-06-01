@@ -1,3 +1,8 @@
+- name: nginx configuration
+  when: ansible_distribution == 'CentOS'
+  action: template src=../templates/nginx.conf dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+
 - name: create "{{ openwisp2_path }}/public_html"
   file:
     path: "{{ openwisp2_path }}/public_html"

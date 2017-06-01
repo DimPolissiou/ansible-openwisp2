@@ -63,7 +63,7 @@
   with_items:
     - python34
     - python34-pip
-    - python3-devel
+    - python34-devel
 
 - name: Install virtualenv
   when: openwisp2_python == "python3"

@@ -1,8 +1,5 @@
-- name: Update YUM package cache
-  yum: update_cache=yes
-  
 - name: Install system packages (1/2)
-  yum: name={{ item }} state=latest
+  yum: update_cache=yes name={{ item }} state=latest
   notify: reload systemd
   with_items:
     - sudo

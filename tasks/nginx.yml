@@ -17,6 +17,22 @@
   command: >
     openssl req -new -nodes -x509 -subj "/C={{ openwisp2_ssl_country }}/ST={{ openwisp2_ssl_state }}/L={{ openwisp2_ssl_locality }}/O={{ openwisp2_ssl_organization }}/CN={{ openwisp2_ssl_common_name }}" -days 3650 -keyout {{ openwisp2_ssl_key }} -out {{ openwisp2_ssl_cert }} -extensions v3_ca creates={{ openwisp2_ssl_cert }}
   notify: restart nginx
+  
+- name: create sites-available directory
+  when: ansible_distribution == 'CentOS'
+  file:
+    path: "/etc/nginx/sites-available/"
+    state: directory
+    group: www-data
+    mode: 0775
+    
+- name: create sites-enabled directory
+  when: ansible_distribution == 'CentOS'
+  file:
+    path: "/etc/nginx/sites-enabled/"
+    state: directory
+    group: www-data
+    mode: 0775
 
 - name: nginx site available
   template:

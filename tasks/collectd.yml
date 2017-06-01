@@ -18,5 +18,11 @@
     - rrdtool-devel
 
 - name: Configure Collectd
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   template: src=../templates/collectd.conf.j2 dest=/etc/collectd/collectd.conf
+  notify: restart collectd
+
+- name: Configure Collectd
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  template: src=../templates/collectd.conf.j2 dest=/etc/collectd.conf
   notify: restart collectd

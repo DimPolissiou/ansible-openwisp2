@@ -44,7 +44,7 @@
   when: ansible_user != 'root'
 
 - name: ensure supervisor is started
-  service: name=supervisor state=started
+  service: name=supervisord state=started
 
 - name: Install python2 packages
   when: openwisp2_python in ["python2.7", "python2"]

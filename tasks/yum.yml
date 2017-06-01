@@ -67,7 +67,8 @@
 
 - name: Install virtualenv
   when: openwisp2_python == "python3"
-  command: "sudo pip3 install virtualenv"
+  command: "pip3 install virtualenv"
+  become: true
 
 - name: Install python wheel (optional, allowed to fail)
   ignore_errors: yes

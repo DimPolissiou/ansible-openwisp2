@@ -1,6 +1,12 @@
-- name: creating group www-data
+- name: ensuring group www-data exists
   group:
     name: www-data
+    state: present
+    
+- name: ensuring user www-data exists
+  user:
+    name: www-data
+    group: www-data
     state: present
 
 - name: create {{ openwisp2_path }}

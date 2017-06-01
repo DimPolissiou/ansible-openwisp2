@@ -1,3 +1,8 @@
+- name: creating group www-data
+  group:
+    name: www-data
+    state: present
+
 - name: create {{ openwisp2_path }}
   file:
     path: "{{ openwisp2_path }}"

@@ -13,6 +13,7 @@
   file:
     path: "{{ openwisp2_path }}"
     state: directory
+    owner: www-data
     group: www-data
     mode: 0775
 
@@ -20,6 +21,7 @@
   file:
     path: "{{ openwisp2_path }}/openwisp2"
     state: directory
+    owner: www-data
     group: www-data
     mode: 0775
 
@@ -27,6 +29,7 @@
   file:
     path: "{{ openwisp2_path }}/log"
     state: directory
+    owner: www-data
     group: www-data
     mode: 0775
 
@@ -35,6 +38,7 @@
   template:
     src: ../templates/manage.py
     dest: "{{ openwisp2_path }}/manage.py"
+    owner: www-data
     group: www-data
     mode: 0754
 
@@ -43,6 +47,7 @@
   template:
     src: ../templates/openwisp2/__init__.py
     dest: "{{ openwisp2_path }}/openwisp2/__init__.py"
+    owner: www-data
     group: www-data
 
 - name: urls.py
@@ -50,6 +55,7 @@
   template:
     src: ../templates/openwisp2/urls.py
     dest: "{{ openwisp2_path }}/openwisp2/urls.py"
+    owner: www-data
     group: www-data
 
 - name: wsgi.py
@@ -57,6 +63,7 @@
   template:
     src: ../templates/openwisp2/wsgi.py
     dest: "{{ openwisp2_path }}/openwisp2/wsgi.py"
+    owner: www-data
     group: www-data
 
 # set openwisp2_secret_key if not defined explicitly
@@ -68,6 +75,7 @@
   template:
     src: ../templates/openwisp2/settings.py
     dest: "{{ openwisp2_path }}/openwisp2/settings.py"
+    owner: www-data
     group: www-data
 
 - name: migrate
@@ -84,6 +92,7 @@
   file:
     path: "{{ openwisp2_database.name }}"
     state: file
+    owner: www-data
     group: www-data
     mode: 0775
 

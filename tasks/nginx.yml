@@ -1,3 +1,11 @@
+- name: Dealing with permissions and SELinux for {{ openwisp2_path }}/log
+  when: ansible_distribution == 'CentOS'
+  shell: {{ item }}
+  with_items:
+  - chown -R www-data:www-data {{ openwisp2_path }}/log
+  - ausearch -c 'nginx' --raw | audit2allow -M my-nginx
+  - semodule -i my-nginx.pp
+
 - name: nginx configuration
   when: ansible_distribution == 'CentOS'
   action: template src=../templates/nginx.conf dest=/etc/nginx/nginx.conf

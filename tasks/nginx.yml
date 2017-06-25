@@ -1,7 +1,7 @@
 - name: Dealing with permissions for {{ openwisp2_path }}/log
   when: ansible_distribution == 'CentOS'
   file: 
-    path: {{ openwisp2_path }}/log
+    path: "{{ openwisp2_path }}/log"
     state: directory
     recurse: yes
     owner: www-data

@@ -29,7 +29,7 @@
 
 - name: Open firewall ports
   when: ansible_distribution == 'CentOS'
-  command: {{ item }}
+  command: "{{ item }}"
   with_items:
     - firewall-cmd --zone=public --add-port=80/tcp --permanent
     - firewall-cmd --zone=public --add-port=443/tcp --permanent
